@@ -25,8 +25,10 @@ namespace CNCJobQueueManager
         {
             JobId = jobId;
             Description = description;
+
+            // updates when Job object is created
             Status = JobStatus.Pending;
-            CreatedAt = DateTime.Now;
+            CreatedAt = DateTime.Now; 
         }
     }
 }

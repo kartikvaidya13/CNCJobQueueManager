@@ -31,7 +31,8 @@ namespace CNCJobQueueManager
             this.btnStopProcessing = new System.Windows.Forms.Button();
             this.SuspendLayout();
 
-
+            // listViewJobs
+            // Displays lists of jobs added to the concurrent queue
             this.listViewJobs.FullRowSelect = true;
             this.listViewJobs.GridLines = true;
             this.listViewJobs.Location = new System.Drawing.Point(12, 12);
@@ -44,7 +45,8 @@ namespace CNCJobQueueManager
             this.listViewJobs.Columns.Add("Status", 100);
             this.listViewJobs.Columns.Add("Created At", 100);
 
-
+            // btnAddJob
+            // Adds job with index to queue 
             this.btnAddJob.Location = new System.Drawing.Point(12, 280);
             this.btnAddJob.Name = "btnAddJob";
             this.btnAddJob.Size = new System.Drawing.Size(100, 30);
@@ -53,7 +55,8 @@ namespace CNCJobQueueManager
             this.btnAddJob.UseVisualStyleBackColor = true;
             this.btnAddJob.Click += new System.EventHandler(this.btnAddJob_Click);
 
-
+            // btnStartProcessing
+            // Simulates the jobs processing through the display
             this.btnStartProcessing.Location = new System.Drawing.Point(130, 280);
             this.btnStartProcessing.Name = "btnStartProcessing";
             this.btnStartProcessing.Size = new System.Drawing.Size(120, 30);
@@ -62,7 +65,8 @@ namespace CNCJobQueueManager
             this.btnStartProcessing.UseVisualStyleBackColor = true;
             this.btnStartProcessing.Click += new System.EventHandler(this.btnStartProcessing_Click);
 
-
+            // btnStopProcessing
+            // Ends the processing of each job.
             this.btnStopProcessing.Location = new System.Drawing.Point(270, 280);
             this.btnStopProcessing.Name = "btnStopProcessing";
             this.btnStopProcessing.Size = new System.Drawing.Size(120, 30);
@@ -71,7 +75,8 @@ namespace CNCJobQueueManager
             this.btnStopProcessing.UseVisualStyleBackColor = true;
             this.btnStopProcessing.Click += new System.EventHandler(this.btnStopProcessing_Click);
 
-
+            // MainForm
+            // Displays main form with buttons and queue. 
             this.ClientSize = new System.Drawing.Size(524, 321);
             this.Controls.Add(this.btnStopProcessing);
             this.Controls.Add(this.btnStartProcessing);
