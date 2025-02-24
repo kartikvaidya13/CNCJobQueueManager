@@ -7,7 +7,8 @@ using System.Windows.Forms;
 namespace CNCJobQueueManager
 {
     /// <summary>
-    /// The main entry point for the CNC Job Queue Manager application.
+    /// The purpose of this application is to manage a queue of jobs for a CNC machine,
+    /// process them asynchronously, and update the status of each job as it is processed. 
     /// </summary>
     static class Program
     {
