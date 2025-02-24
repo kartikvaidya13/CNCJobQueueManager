@@ -34,8 +34,7 @@ namespace CNCJobQueueManager
         }
 
         /// <summary>
-        /// Processes jobs asynchronously until cancellation is requested. 
-        /// Notifies subscribers of job status updates.
+        /// Processes jobs asynchronously until cancellation is requested and notifies subscribers of job status updates.
         /// </summary>
         /// <returns>A task representing the asynchronous operation.</returns>
         public async Task ProcessJobsAsync()

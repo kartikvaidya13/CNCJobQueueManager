@@ -18,8 +18,7 @@ namespace CNCJobQueueManager
     }
 
     /// <summary>
-    /// Represents a CNC job that can be added to the job queue. Includes properties for job such as JobID,
-    /// description, status, and created at time.
+    /// Represents a CNC job that can be added to the job queue. Includes properties for job such as JobID, description, status, and created at time.
     /// </summary>
     public class CNCJob
     {
