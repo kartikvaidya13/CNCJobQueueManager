@@ -10,53 +10,80 @@ namespace CNCJobQueueManager
 {
     public class JobQueueManager
     {
+
+        // Thread-safe queue to store CNC Jobs
         private ConcurrentQueue<CNCJob> jobQueue = new ConcurrentQueue<CNCJob>();
+
+        // Token source to manage cancellation of job processing
         private CancellationTokenSource cts = new CancellationTokenSource();
 
+        // Event to notify subscribers when job is updated
         public event Action<CNCJob> JobUpdated;
 
-        // Adds job to jobQueue, notifies subscribers of job has been updated
+        /// <summary>
+        /// Adds a job to the job queue and notifies subscribers that the job has been added
+        /// </summary>
+        /// <param name="job"></param>
         public void EnqueueJob(CNCJob job)
         {
-            // notifies subscribers that job has been added to queue
+            // Enqueues the job to the job queue
             jobQueue.Enqueue(job);
+
+            // Notifies subscribers that the job has been added
             JobUpdated?.Invoke(job);
         }
 
-        // Function to process Jobs asynchronously unless cancellation is requested. Notifies subscribers of job processing and 
-        // simulates time job is processed. Job status will either be updated to inprogress, completed, or cancelled. 
+        /// <summary>
+        /// Processes jobs asynchronously until cancellation is requested. 
+        /// Notifies subscribers of job status updates.
+        /// </summary>
+        /// <returns>A task representing the asynchronous operation.</returns>
         public async Task ProcessJobsAsync()
         {
+            // Continue processing jobs until cancellation is requested
             while (!cts.IsCancellationRequested)
             {
+                // Try to dequeue a job from the job queue
                 if (jobQueue.TryDequeue(out CNCJob job))
                 {
-                    // notifies subscribers that job is in progress
-                    job.Status = JobStatus.InProgress; 
-                    JobUpdated?.Invoke(job); 
+                    // Update job status to InProgress and notify subscribers
+                    job.Status = JobStatus.InProgress;
 
-                    //  function will try to update the status of the job  to completed unless cts is cancelled.
-                    try 
+                    // if job is updated, notify subscribers
+                    JobUpdated?.Invoke(job);
+
+                    // Simulate job processing
+                    try
                     {
-                        await Task.Delay(2000, cts.Token); // simulates Job processing in real time
-                        job.Status = JobStatus.Completed; // updates status to completed
+                        // Simulate job processing by delaying for 2 seconds
+                        await Task.Delay(2000, cts.Token);
+
+                        // Update job status to Completed and notify subscribers
+                        job.Status = JobStatus.Completed; 
                     }
                     catch (TaskCanceledException)
                     {
+                        // If the task is cancelled, update job status to Failed and notify subscribers
                         job.Status = JobStatus.Failed; // updates status to failed
                     }
+
+                    // Notify subscribers that the job has been updated
                     JobUpdated?.Invoke(job);
                 }
                 else
                 {
-                    await Task.Delay(500); // waits for next task
+                    // Wait for a short period before checking the queue again for new jobs
+                    await Task.Delay(500); 
                 }
             }
         }
 
-        // Cancels token when invoked
+        /// <summary>
+        /// Cancels job processing by requesting cancellation of the token source
+        /// </summary>
         public void StopProcessing()
         {
+            // request cancellation of the token source
             cts.Cancel();
         }
     }

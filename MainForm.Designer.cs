@@ -8,12 +8,26 @@ namespace CNCJobQueueManager
 {
     partial class MainForm
     {
+        // Required designer variable
         private System.ComponentModel.IContainer components = null;
+
+        // ListView to dislay the list of jobs
         private System.Windows.Forms.ListView listViewJobs;
+
+        // Button to add a new job to the queue
         private System.Windows.Forms.Button btnAddJob;
+
+        // Button to start processing jobs
         private System.Windows.Forms.Button btnStartProcessing;
+
+        // Button to stop processing jobs
         private System.Windows.Forms.Button btnStopProcessing;
 
+        /// <summary>
+        /// REQUIRED method for designer support - DO NOT MODIFY
+        /// Clean up any resources being used, including disposing of components.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -23,6 +37,10 @@ namespace CNCJobQueueManager
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// REQUIRED method for designer support - DO NOT MODIFY
+        /// Initializes the components of the form.
+        /// </summary>
         private void InitializeComponent()
         {
             this.listViewJobs = new System.Windows.Forms.ListView();
@@ -32,7 +50,7 @@ namespace CNCJobQueueManager
             this.SuspendLayout();
 
             // listViewJobs
-            // Displays lists of jobs added to the concurrent queue
+            // Configure the list view to display the list of jobs
             this.listViewJobs.FullRowSelect = true;
             this.listViewJobs.GridLines = true;
             this.listViewJobs.Location = new System.Drawing.Point(12, 12);
@@ -46,7 +64,7 @@ namespace CNCJobQueueManager
             this.listViewJobs.Columns.Add("Created At", 100);
 
             // btnAddJob
-            // Adds job with index to queue 
+            // Configure the Add Job Button
             this.btnAddJob.Location = new System.Drawing.Point(12, 280);
             this.btnAddJob.Name = "btnAddJob";
             this.btnAddJob.Size = new System.Drawing.Size(100, 30);
@@ -56,7 +74,7 @@ namespace CNCJobQueueManager
             this.btnAddJob.Click += new System.EventHandler(this.btnAddJob_Click);
 
             // btnStartProcessing
-            // Simulates the jobs processing through the display
+            // Configures the Start Processing Button
             this.btnStartProcessing.Location = new System.Drawing.Point(130, 280);
             this.btnStartProcessing.Name = "btnStartProcessing";
             this.btnStartProcessing.Size = new System.Drawing.Size(120, 30);
@@ -66,7 +84,7 @@ namespace CNCJobQueueManager
             this.btnStartProcessing.Click += new System.EventHandler(this.btnStartProcessing_Click);
 
             // btnStopProcessing
-            // Ends the processing of each job.
+            // Configures the Stop Processing Button
             this.btnStopProcessing.Location = new System.Drawing.Point(270, 280);
             this.btnStopProcessing.Name = "btnStopProcessing";
             this.btnStopProcessing.Size = new System.Drawing.Size(120, 30);
@@ -76,7 +94,7 @@ namespace CNCJobQueueManager
             this.btnStopProcessing.Click += new System.EventHandler(this.btnStopProcessing_Click);
 
             // MainForm
-            // Displays main form with buttons and queue. 
+            // Configures the main form
             this.ClientSize = new System.Drawing.Size(524, 321);
             this.Controls.Add(this.btnStopProcessing);
             this.Controls.Add(this.btnStartProcessing);

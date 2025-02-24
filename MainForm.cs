@@ -7,12 +7,21 @@ using System.Windows.Forms;
 using CNCJobQueueManager;
 
 namespace CNCJobQueueManager
-{  
+{
+    /// <summary>
+    /// Main form for the CNC Job Queue Manager application.
+    /// </summary>
     public partial class MainForm : Form
     {
+        // Manages the job queue and processing
         private JobQueueManager jobQueueManager;
+
+        // Keeps track of the next job ID to be assigned
         private int nextJobId = 1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -20,29 +29,43 @@ namespace CNCJobQueueManager
             jobQueueManager.JobUpdated += OnJobUpdated;
         }
 
-        // Event handling for Add Job button click. Queues a new job on the board with the ID and name and adds it to the 
-        // CNC Job object. Also calls AddJobToListView to display queued job. 
+        /// <summary>
+        /// Handles the Add Job button click event. Queues a new job and adds it to the list view.
+        /// </summary>
+        /// <param name="sender">The source of the event (the Add Job button).</param>
+        /// <param name="e">The event data.</param>
         private void btnAddJob_Click(object sender, EventArgs e)
         {
             var job = new CNCJob(nextJobId, $"Laser cutting job {nextJobId}");
-            nextJobId++; // increment JobID for next Job added to ListView
+            nextJobId++; // increment JobID for next Job 
             jobQueueManager.EnqueueJob(job);
             AddJobToListView(job);
         }
 
-        //Event handling for Start Processing button. Changes status for each job being procressed. 
+        /// <summary>
+        /// Handles the Start Processing button click event, Starts processing jobs asynchronously.
+        /// </summary>
+        /// <param name="sender">The source of the event (the Start Processing button).</param>
+        /// <param name="e">The event data.</param>
         private void btnStartProcessing_Click(object sender, EventArgs e)
         {
             Task.Run(() => jobQueueManager.ProcessJobsAsync());
         }
 
-        //Event handling for Stop Processing button. Cancels all processing for jobs to avoid race conditions. 
+        /// <summary>
+        /// Handles the Stop Processing button click event. Stops processing jobs. 
+        /// </summary>
+        /// <param name="sender">The source of the event (the Stop Processing button).</param>
+        /// <param name="e">The event data.</param>
         private void btnStopProcessing_Click(object sender, EventArgs e)
         {
             jobQueueManager.StopProcessing();
         }
 
-        // Function to add Job to ListView. 
+        /// <summary>
+        /// Adds a job to the list view.
+        /// </summary>
+        /// <param name="job">The job to be added to the list view.</param>
         private void AddJobToListView(CNCJob job)
         {
             var item = new ListViewItem(job.JobId.ToString());
@@ -53,12 +76,16 @@ namespace CNCJobQueueManager
             listViewJobs.Items.Add(item);
         }
 
-        // Safely updates UI from any thread. 
+        /// <summary>
+        /// Handles job updates and safely updates the UI from any thread. 
+        /// </summary>
+        /// <param name="job">The job that was updated.</param>
         private void OnJobUpdated(CNCJob job)
         {
             if (this.InvokeRequired)
             {
-                this.BeginInvoke(new Action(() => UpdateJobInListView(job))); // schedules update asynchronously
+                // Schedule the updste asynchronously if called from a different thread.
+                this.BeginInvoke(new Action(() => UpdateJobInListView(job)));
             }
             else
             {
@@ -66,7 +93,10 @@ namespace CNCJobQueueManager
             }
         }
 
-        // Updates the status of a job in the ListView. 
+        /// <summary>
+        /// Updates the job status in the list view.
+        /// </summary>
+        /// <param name="job">The job to be added to the list view</param>
         private void UpdateJobInListView(CNCJob job)
         {
             foreach (ListViewItem item in listViewJobs.Items)
