@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CNCJobQueueManager", "CNCJobQueueManager.csproj", "{1EEEA98D-D83A-4352-99CD-1C505006FDBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EEEA98D-D83A-4352-99CD-1C505006FDBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EEEA98D-D83A-4352-99CD-1C505006FDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EEEA98D-D83A-4352-99CD-1C505006FDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EEEA98D-D83A-4352-99CD-1C505006FDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C0C84474-D515-49CB-A29D-3ACE20E8B46D}
+	EndGlobalSection
+EndGlobal
