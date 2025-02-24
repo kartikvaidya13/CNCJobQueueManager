@@ -68,10 +68,15 @@ namespace CNCJobQueueManager
         /// <param name="job">The job to be added to the list view.</param>
         private void AddJobToListView(CNCJob job)
         {
+            // Creates a new list view item with the job ID
             var item = new ListViewItem(job.JobId.ToString());
+
+            // Adds the job description, status, and created at time to the list view
             item.SubItems.Add(job.Description);
             item.SubItems.Add(job.Status.ToString());
             item.SubItems.Add(job.CreatedAt.ToString("HH:mm:ss"));
+
+            // Associates the job with the list view item
             item.Tag = job;
             listViewJobs.Items.Add(item);
         }
@@ -99,8 +104,10 @@ namespace CNCJobQueueManager
         /// <param name="job">The job to be added to the list view</param>
         private void UpdateJobInListView(CNCJob job)
         {
+            // Find the job in the list view and update its status
             foreach (ListViewItem item in listViewJobs.Items)
             {
+                // Check if the job ID matches, if so, update the status
                 if (((CNCJob)item.Tag).JobId == job.JobId)
                 {
                     item.SubItems[2].Text = job.Status.ToString();
